@@ -11,6 +11,7 @@ public class LoginApp {
     private static final int MAX_ATTEMPTS = 3;
     private static ArrayList<String> usernames = new ArrayList<>();
     private static ArrayList<String> passwords = new ArrayList<>();
+    private static ArrayList<Integer> mfas = new ArrayList<>();
     
     public static void authenticate() {
         // load credentials from file
@@ -30,15 +31,59 @@ public class LoginApp {
             System.out.print("Username: ");
             user = scanner.nextLine();
             
+            // validate username for SQL injection
+            // Requirement: Username must not contain SQL injection characters (/, -, ;, ")
+            if (!Validation.checkSQLInjection(user)) {
+                System.out.println("\nLogin failed. Invalid input.");
+                attempts++;
+                continue;
+            }
+            
             // prompt for password (hidden)
-            String pass = getHiddenPassword("Password: ");
+            String pass = getHiddenPassword("Password: ", scanner);
+            
+            // validate password for SQL injection and policy
+            // Requirement: Password must not contain SQL injection characters and must be 8-12 characters with at least one uppercase, lowercase, and numeric
+            if (!Validation.checkSQLInjection(pass) || !Validation.checkPasswordPolicy(pass)) {
+                System.out.println("\nLogin failed. Invalid input.");
+                attempts++;
+                continue;
+            }
             
             // authenticate login with database
+            int userIndex = -1;
             for (int i = 0; i < usernames.size(); i++) {
                 if (usernames.get(i).equals(user) && passwords.get(i).equals(pass)) {
-                    loggedIn = true;
+                    userIndex = i;
                     break;
                 }
+            }
+            
+            if (userIndex != -1) {
+                // prompt for MFA
+                System.out.print("MFA (10-digit number): ");
+                String mfaInput = scanner.nextLine();
+                
+                // validate MFA
+                // Requirement: MFA must be exactly 10 digits and within integer range
+                if (!Validation.checkMFALength(mfaInput) || !Validation.checkIntegerOverflow(mfaInput)) {
+                    System.out.println("\nLogin failed. Invalid input.");
+                    attempts++;
+                    continue;
+                }
+                
+                int mfaValue = Integer.parseInt(mfaInput);
+                if (mfas.get(userIndex) == mfaValue) {
+                    loggedIn = true;
+                } else {
+                    System.out.println("\nLogin failed. Invalid input.");
+                    attempts++;
+                    continue;
+                }
+            } else {
+                System.out.println("\nLogin failed. Invalid input.");
+                attempts++;
+                continue;
             }
             
             // secure software dev error handling
@@ -66,7 +111,7 @@ public class LoginApp {
     }
     
     // method to read hidden password
-    public static String getHiddenPassword(String prompt) {
+    public static String getHiddenPassword(String prompt, Scanner scanner) {
 
         Console console = System.console();
         
@@ -79,7 +124,6 @@ public class LoginApp {
         else {
             // regular input for testing
             System.out.print(prompt);
-            Scanner scanner = new Scanner(System.in);
             return scanner.nextLine();
         }
     }
@@ -122,9 +166,14 @@ public class LoginApp {
                 String line = fileScanner.nextLine();
                 String[] parts = line.split(":");
 
-                if (parts.length == 2) {
+                if (parts.length == 3) {
                     usernames.add(parts[0]);
                     passwords.add(parts[1]);
+                    try {
+                        mfas.add(Integer.parseInt(parts[2]));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid MFA in credentials file.");
+                    }
                 }
             }
             fileScanner.close();
@@ -136,12 +185,13 @@ public class LoginApp {
     }
     
     // method to create and write default credentials to file
+    // Updated for new requirement: Passwords must be 8-12 characters, include MFA
     private static void initializeCredentialsFile() {
         try {
             FileWriter writer = new FileWriter(CREDENTIALS_FILE);
-            writer.write("scientist:SecurePass123!\n");
-            writer.write("engineer:EngineerKey456@\n");
-            writer.write("security:SecAware789#\n");
+            writer.write("scientist:Secure123!:1234567890\n");
+            writer.write("engineer:Eng456@:0987654321\n");
+            writer.write("security:Sec789#:1122334455\n");
             writer.close();
             System.out.println("Credentials file created: " + CREDENTIALS_FILE);
             

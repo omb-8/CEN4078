@@ -32,9 +32,9 @@ java Main
 
 Use the following credentials to test the application:
 
-Username  | Password          | MFA
-scientist | SecurePass123!    | 1234567890
-engineer  | EngineerKey456@   | 0987654321
-security  | SecAware789#      | 1122334455
+Username  | Password     | MFA
+scientist | Secure123!   | 1234567890
+engineer  | Eng456@      | 0987654321
+security  | Sec789#      | 1122334455
 
 To log out for any user, enter 1 and press 'Enter'.
