@@ -3,13 +3,12 @@
 ## Project: Input Validation Module
 ## Version: 1.1
 ## Date: January 25, 2026
-## Time: 12:00 PM
 
 ### Changes Made
 
 #### 1. Added Validation Class
 - **File:** Validation.java (new file)
-- **Change:** Created a new class `Validation` with three methods:
+- **Change:** Created a new class `Validation` with three methods and one helper method:
   - `checkSQLInjection(String input)`: Checks for forbidden characters / - ; "
   - `checkPasswordPolicy(String password)`: Enforces 8-12 chars, at least one upper, lower, numeric
   - `checkIntegerOverflow(String input)`: Validates input as integer within int range
@@ -51,5 +50,6 @@
 
 ### Notes
 - All changes comply with secure software development practices, including secure error handling to prevent information leakage.
-- Code is written in Java, as chosen for this exercise.
+- Code is written in Java.
 - No changes were made to previous code from login_module; this is an enhancement based on the baseline.
+- Autocomplete tool Github Copilot assisted in creating this document.

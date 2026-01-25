@@ -1,3 +1,18 @@
+/**
+ * CEN 4078 Secure Software Development
+ * Programming Exercise – Input Validation & Type Checking
+ * 
+ * The LoginApp class allows the user to log in with username, password, and MFA,
+ * implementing input validation to prevent SQL injection, enforce password policy,
+ * and check integer overflow for MFA.
+ * 
+ * @author Olivia Bunch
+ * @version 1.0
+ * @date January 25, 2026
+ * 
+ * Updates to this file to meet the new requirements were assisted by autocomplete tool Github Copilot.
+ */
+
 import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
@@ -31,7 +46,7 @@ public class LoginApp {
             System.out.print("Username: ");
             user = scanner.nextLine();
             
-            // validate username for SQL injection
+            // Change: validate username for SQL injection
             // Requirement: Username must not contain SQL injection characters (/, -, ;, ")
             if (!Validation.checkSQLInjection(user)) {
                 System.out.println("\nLogin failed. Invalid input.");
@@ -42,7 +57,7 @@ public class LoginApp {
             // prompt for password (hidden)
             String pass = getHiddenPassword("Password: ", scanner);
             
-            // validate password for SQL injection and policy
+            // Change: validate password for SQL injection and policy
             // Requirement: Password must not contain SQL injection characters and must be 8-12 characters with at least one uppercase, lowercase, and numeric
             if (!Validation.checkSQLInjection(pass) || !Validation.checkPasswordPolicy(pass)) {
                 System.out.println("\nLogin failed. Invalid input.");
@@ -59,6 +74,7 @@ public class LoginApp {
                 }
             }
             
+            // Change: prompt for and validate MFA
             if (userIndex != -1) {
                 // prompt for MFA
                 System.out.print("MFA (10-digit number): ");
@@ -73,14 +89,17 @@ public class LoginApp {
                 }
                 
                 int mfaValue = Integer.parseInt(mfaInput);
+
                 if (mfas.get(userIndex) == mfaValue) {
                     loggedIn = true;
-                } else {
+                } 
+                else {
                     System.out.println("\nLogin failed. Invalid input.");
                     attempts++;
                     continue;
                 }
-            } else {
+            } 
+            else {
                 System.out.println("\nLogin failed. Invalid input.");
                 attempts++;
                 continue;
@@ -166,12 +185,14 @@ public class LoginApp {
                 String line = fileScanner.nextLine();
                 String[] parts = line.split(":");
 
+                // Change: load MFA along with username and password
                 if (parts.length == 3) {
                     usernames.add(parts[0]);
                     passwords.add(parts[1]);
                     try {
                         mfas.add(Integer.parseInt(parts[2]));
-                    } catch (NumberFormatException e) {
+                    } 
+                    catch (NumberFormatException e) {
                         System.out.println("Invalid MFA in credentials file.");
                     }
                 }
@@ -184,7 +205,7 @@ public class LoginApp {
         }
     }
     
-    // method to create and write default credentials to file
+    // Change: method to create and write default credentials to file
     // Updated for new requirement: Passwords must be 8-12 characters, include MFA
     private static void initializeCredentialsFile() {
         try {

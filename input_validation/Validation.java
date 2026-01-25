@@ -18,7 +18,7 @@ public class Validation {
      * @return true if no forbidden characters, false otherwise
      */
     public static boolean checkSQLInjection(String input) {
-        if (!input.contains("/") && !input.contains("-") && !input.contains(";") && !input.contains("\"")) {
+        if ((!input.contains("/")) && (!input.contains("-")) && (!input.contains(";")) && (!input.contains("\""))) {
             return true;
         }
         return false;
@@ -59,11 +59,11 @@ public class Validation {
      * @return true if valid integer within range, false otherwise
      */
     public static boolean checkIntegerOverflow(String input) {
-        if (input == null || input.isEmpty()) {
+        if ((input == null) || (input.isEmpty())) {
             return false;
         }
         try {
-            long value = Long.parseLong(input);
+            double value = Double.parseDouble(input);
             return value >= Integer.MIN_VALUE && value <= Integer.MAX_VALUE;
         } 
         catch (NumberFormatException e) {
