@@ -211,8 +211,8 @@ public class LoginApp {
         try {
             FileWriter writer = new FileWriter(CREDENTIALS_FILE);
             writer.write("scientist:Secure123!:1234567890\n");
-            writer.write("engineer:Eng456@:0987654321\n");
-            writer.write("security:Sec789#:1122334455\n");
+            writer.write("engineer:Eng4567@:0987654321\n");
+            writer.write("security:Sec7890#:1122334455\n");
             writer.close();
             System.out.println("Credentials file created: " + CREDENTIALS_FILE);
             
