@@ -54,3 +54,16 @@
 - Code is written in Java.
 - No changes were made to previous code from login_module; this is an enhancement based on the baseline.
 - Autocomplete tool Github Copilot assisted in creating this document.
+
+### 8. Secure Login Module Updates
+- **Files:** secure_login/Cryptographer.java, secure_login/SecureLogin.java
+- **Date:** February 20, 2026
+- **Version:** 1.2
+- **Change:**
+  - Implemented a `Cryptographer` class that provides alphabetic and numeric Vigenère encryption/decryption per the exercise requirements.
+  - Fixed numeric Vigenère math so encryption uses `(p + k) mod 10` and decryption uses `(c - k + 10) mod 10`.
+  - Added combined `encrypt(String)` and `decrypt(String)` methods that apply alphabetic and numeric keys per-character.
+  - Updated `SecureLogin.java` to validate usernames (alphanumeric only) and passwords (must contain at least one uppercase, one lowercase, and one digit), store ciphertext produced by `Cryptographer.encrypt()`, and verify authentication by comparing ciphertexts.
+  - Added minimal non-revealing self-tests to check encryption/decryption correctness.
+- **Reason:** Bring the `secure_login` module into compliance with assignment requirements: use `ARGOSROCK` as the alphabetic key and `1963` as the numeric key, provide required encryption/decryption methods, and ensure secure input validation and storage of ciphertext.
+- **Notes:** Changes include code comments indicating edits. No plaintext secrets are printed; test outputs are non-revealing pass/fail indicators.
