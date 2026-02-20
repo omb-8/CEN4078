@@ -1,10 +1,11 @@
 /**
+ * CEN4078 Secure Software Development
  * Cryptographer.java
  *
  * Handles alphabetic and numeric Vigenère encryption/decryption.
  *
- * Author: Olivia Bunch
- * Version: 1.0
+ * @author Olivia Bunch
+ * @version: 1.0
  */
 
 public class Cryptographer {

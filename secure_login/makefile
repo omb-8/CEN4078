@@ -1,5 +1,12 @@
+#
 # CEN 4078 Secure Software Development
 # Java Makefile
+#
+# Makefile for compiling and running the SecureLogin Java application
+#
+# @author Olivia Bunch
+# @version: 1.0
+#
 
 JAVAC = javac
 JAVA = java
