@@ -1,3 +1,13 @@
+/**
+ * CEN4078 Secure Software Development
+ * CoveringAllCasesApp.java
+ *
+ * Handles password setup with policy.
+ *
+ * @author Olivia Bunch
+ * @version: 1.0
+ */
+
 import java.util.Scanner;
 
 public class CoveringAllCasesApp {

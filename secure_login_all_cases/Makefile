@@ -1,3 +1,13 @@
+#
+ # CEN4078 Secure Software Development
+ # Makefile
+ #
+ # Runs the program with "make" and "make clean"
+ #
+ # @author Olivia Bunch
+ # @version: 1.0
+#
+
 .PHONY: build run run-secure run-covering clean
 .DEFAULT_GOAL := run
 

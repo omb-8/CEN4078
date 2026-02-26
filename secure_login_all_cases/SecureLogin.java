@@ -1,3 +1,13 @@
+/**
+ * CEN4078 Secure Software Development
+ * SecureLogin.java
+ *
+ * Handles secure login functionality.
+ *
+ * @author Olivia Bunch
+ * @version: 1.0
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

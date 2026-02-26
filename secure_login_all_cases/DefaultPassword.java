@@ -1,3 +1,13 @@
+/**
+ * CEN4078 Secure Software Development
+ * DefaultPassword.java
+ *
+ * Generates and sends secure default passwords.
+ *
+ * @author Olivia Bunch
+ * @version: 1.0
+ */
+
 import java.security.SecureRandom;
 import java.io.FileWriter;
 import java.io.IOException;

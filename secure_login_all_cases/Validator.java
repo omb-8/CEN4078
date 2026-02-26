@@ -1,3 +1,13 @@
+/**
+ * CEN4078 Secure Software Development
+ * Validator.java
+ *
+ * Validates user credentials.
+ *
+ * @author Olivia Bunch
+ * @version: 1.0
+ */
+
 public class Validator {
 
     public static boolean validCredentials(String input) {
