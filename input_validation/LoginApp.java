@@ -27,6 +27,8 @@ public class LoginApp {
     private static ArrayList<String> usernames = new ArrayList<>();
     private static ArrayList<String> passwords = new ArrayList<>();
     private static ArrayList<Integer> mfas = new ArrayList<>();
+    // Change: use Cryptographer to encrypt credentials at rest
+    private static Cryptographer crypto = new Cryptographer();
     
     public static void authenticate() {
         // load credentials from file
@@ -187,12 +189,33 @@ public class LoginApp {
 
                 // Change: load MFA along with username and password
                 if (parts.length == 3) {
-                    usernames.add(parts[0]);
-                    passwords.add(parts[1]);
+                    // Attempt to decrypt stored values. Existing files may be plaintext
+                    // (previous versions). Try decrypting and fall back to plaintext
+                    // if decrypted values do not meet validation checks.
+                    String userCandidate = parts[0];
+                    String passCandidate = parts[1];
+                    String mfaCandidate = parts[2];
+
+                    // Try decrypting
                     try {
-                        mfas.add(Integer.parseInt(parts[2]));
-                    } 
-                    catch (NumberFormatException e) {
+                        String decUser = crypto.decrypt(parts[0]);
+                        String decPass = crypto.decrypt(parts[1]);
+                        String decMfa = crypto.decrypt(parts[2]);
+                        // Basic validation to decide whether decryption produced valid values
+                        if (decUser.matches("[A-Za-z0-9]+") && Validation.checkPasswordPolicy(decPass) && Validation.checkMFALength(decMfa)) {
+                            userCandidate = decUser;
+                            passCandidate = decPass;
+                            mfaCandidate = decMfa;
+                        }
+                    } catch (Exception e) {
+                        // Decryption failed — assume plaintext store from older version
+                    }
+
+                    usernames.add(userCandidate);
+                    passwords.add(passCandidate);
+                    try {
+                        mfas.add(Integer.parseInt(mfaCandidate));
+                    } catch (NumberFormatException e) {
                         System.out.println("Invalid MFA in credentials file.");
                     }
                 }
@@ -210,9 +233,10 @@ public class LoginApp {
     private static void initializeCredentialsFile() {
         try {
             FileWriter writer = new FileWriter(CREDENTIALS_FILE);
-            writer.write("scientist:Secure123!:1234567890\n");
-            writer.write("engineer:Eng4567@:0987654321\n");
-            writer.write("security:Sec7890#:1122334455\n");
+            // Change: store encrypted credentials on disk using Cryptographer
+            writer.write(crypto.encrypt("scientist") + ":" + crypto.encrypt("Secure123!") + ":" + crypto.encrypt("1234567890") + "\n");
+            writer.write(crypto.encrypt("engineer") + ":" + crypto.encrypt("Eng4567@") + ":" + crypto.encrypt("0987654321") + "\n");
+            writer.write(crypto.encrypt("security") + ":" + crypto.encrypt("Sec7890#") + ":" + crypto.encrypt("1122334455") + "\n");
             writer.close();
             System.out.println("Credentials file created: " + CREDENTIALS_FILE);
             

@@ -67,3 +67,27 @@
   - Added minimal non-revealing self-tests to check encryption/decryption correctness.
 - **Reason:** Bring the `secure_login` module into compliance with assignment requirements: use `ARGOSROCK` as the alphabetic key and `1963` as the numeric key, provide required encryption/decryption methods, and ensure secure input validation and storage of ciphertext.
 - **Notes:** Changes include code comments indicating edits. No plaintext secrets are printed; test outputs are non-revealing pass/fail indicators.
+
+### 9. Covering All Cases Module (new)
+- **Files:** covering_all_cases/CoveringAllCasesApp.java, covering_all_cases/PasswordPolicy.java, covering_all_cases/DefaultPassword.java, covering_all_cases/README.md
+- **Date:** February 26, 2026
+- **Time:** 14:20
+- **Version:** 1.0
+- **Change:** Added new module implementing the "Programming Exercise – Covering All Cases". The module:
+  - Provides `PasswordPolicy.getPasswordPolicy()` which returns the human-readable password policy.
+  - Uses `PasswordPolicy.validatePassword()` to check passwords.
+  - Allows the user two attempts to create a valid password; if both attempts fail the system uses `DefaultPassword` (assignment asked for class named `default-password`; implemented as `DefaultPassword` because hyphens are invalid in Java identifiers) to generate a random secure default password that meets the policy.
+  - `DefaultPassword.sendSecureEmail(username, password)` simulates secure delivery by writing a file named `covering_all_cases_secure_email_<username>.txt` containing the default password. The program does not print the password to stdout.
+  - Console messages are intentionally non-revealing to avoid leaking extra information to attackers.
+- **Reason:** Implement assignment requirement to cover unhandled cases by using secure defaults and to demonstrate configuration control and documentation of changes.
+- **Requirement:** Two attempts for password creation; fallback to default password generator; method returning password policy; use secure handling of defaults and notifications.
+
+### 10. Encrypted Credentials Storage for LoginApp
+- **Files:** input_validation/LoginApp.java
+- **Date:** February 26, 2026
+- **Time:** 15:10
+- **Version:** 1.2
+- **Change:** Updated `LoginApp` to store credentials encrypted at rest using `secure_login/Cryptographer`. The `initializeCredentialsFile()` method now writes encrypted `username:password:mfa` entries. The `loadCredentials()` method attempts to decrypt stored values and falls back to plaintext if decryption does not produce valid credentials (for backward compatibility with older unencrypted files).
+- **Reason:** Improve security by encrypting stored credentials while preserving compatibility and avoiding data loss.
+- **Requirement:** Encrypt credentials on disk; ensure runtime behavior and validation remain unchanged; maintain secure error handling and no leakage of plaintext secrets to stdout.
+

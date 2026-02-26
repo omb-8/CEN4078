@@ -12,15 +12,15 @@ JAVAC = javac
 JAVA = java
 TARGET = SecureLogin
 
-SRC = SecureLogin.java Cryptographer.java Validator.java
+SRC = SecureLogin.java Cryptographer.java
 
 all: build run
 
-build:
-	$(JAVAC) $(SRC)
+build: ../shared/Validator.class
+	$(JAVAC) ../shared/Validator.java $(SRC)
 
 run:
-	$(JAVA) -cp . $(TARGET)
+	$(JAVA) -cp .:.. $(TARGET)
 
 clean:
 	rm -f *.class

@@ -1,16 +1,11 @@
-/**
- * CEN4078 Secure Software Development
- * Validator.java
- *
- * Performs secure input validation.
- *
- * Author: Olivia Bunch
- * Version: 1.0
- */
+package shared;
 
 public class Validator {
 
     public static boolean validCredentials(String input) {
+        if (input == null) return false;
+        if (input.length() < 8) return false;
+
         boolean upper = false;
         boolean lower = false;
         boolean digit = false;

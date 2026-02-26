@@ -1,16 +1,5 @@
-/**
- * CEN4078 Secure Software Development
- * SecureLogin.java
- *
- * Main driver for secure login system.
- *
- * @author: Olivia Bunch
- * @version: 1.0
- */
-
 import java.util.ArrayList;
 import java.util.Scanner;
-import shared.Validator;
 
 public class SecureLogin {
 
@@ -27,15 +16,12 @@ public class SecureLogin {
         System.out.print("Create Password: ");
         String password = scanner.nextLine();
 
-        // Validate inputs: password must have upper, lower, digit
-        // Username must be alphanumeric only
         if (!username.matches("[A-Za-z0-9]+") || !Validator.validCredentials(password)) {
             System.out.println("Invalid credentials.");
             scanner.close();
             return;
         }
 
-        // Store encrypted ciphertext per-character
         encryptedUsers.add(crypto.encrypt(username));
         encryptedPasswords.add(crypto.encrypt(password));
 
@@ -59,13 +45,12 @@ public class SecureLogin {
             System.out.println("Authentication failed.");
         }
 
-        // Self-tests: verify decryption matches
         boolean decryptsMatch = crypto.decrypt(encryptedUsers.get(0)).equals(loginUser) &&
                                 crypto.decrypt(encryptedPasswords.get(0)).equals(loginPass);
 
         System.out.println("Encryption check: " + (auth ? "passed" : "failed"));
         System.out.println("Decryption check: " + (decryptsMatch ? "passed" : "failed"));
-    
+
         scanner.close();
     }
 }
