@@ -7,8 +7,7 @@
  * @version 1.0
  */
 public class PasswordPolicy {
-    // Returns a human-readable password policy. This method satisfies the
-    // assignment requirement to "create a method which returns the password policy." 
+    // Returns a human-readable password policy.
     public static String getPasswordPolicy() {
         // Align policy with the secure_login/Validator.java which requires
         // alphanumeric passwords containing at least one upper, lower, and digit.
