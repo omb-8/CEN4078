@@ -3,9 +3,10 @@
  * Cryptographer.java
  *
  * Handles alphabetic and numeric Vigenère encryption/decryption.
+ * CHANGED v2.0: No code changes. Version updated for consistency with release 2.0.
  *
  * @author Olivia Bunch
- * @version: 1.0
+ * @version: 2.0
  */
 
 public class Cryptographer {

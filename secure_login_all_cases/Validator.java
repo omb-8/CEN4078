@@ -3,9 +3,11 @@
  * Validator.java
  *
  * Validates user credentials.
+ * CHANGED v2.0: Now used by PasswordHandler for centralized password validation.
+ * No code changes to this file, but now part of the lowest-level validation layer.
  *
  * @author Olivia Bunch
- * @version: 1.0
+ * @version: 2.0
  */
 
 public class Validator {

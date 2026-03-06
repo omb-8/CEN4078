@@ -3,9 +3,11 @@
  * DefaultPassword.java
  *
  * Generates and sends secure default passwords.
+ * CHANGED v2.0: Functionality now handled by PasswordHandler with exception handling
+ * at the lowest level. This file kept for backward compatibility.
  *
  * @author Olivia Bunch
- * @version: 1.0
+ * @version: 2.0
  */
 
 import java.security.SecureRandom;
