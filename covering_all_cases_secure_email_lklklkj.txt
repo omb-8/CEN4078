@@ -1,0 +1,6 @@
+To: lklklkj@example.com
+Subject: Your default password
+
+Your account has been set to a default password.
+Default password: p71floQpnhb
+Please change it after first login.

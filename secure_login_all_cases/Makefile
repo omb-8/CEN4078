@@ -3,7 +3,6 @@
 # Makefile
 #
 # Runs the program with "make" and "make clean"
-# CHANGED v2.0: Updated for exception handling at lowest level with PasswordHandler
 #
 # @author Olivia Bunch
 # @version: 2.0

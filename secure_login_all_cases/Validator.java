@@ -2,10 +2,6 @@
  * CEN4078 Secure Software Development
  * Validator.java
  *
- * Validates user credentials.
- * CHANGED v2.0: Now used by PasswordHandler for centralized password validation.
- * No code changes to this file, but now part of the lowest-level validation layer.
- *
  * @author Olivia Bunch
  * @version: 2.0
  */

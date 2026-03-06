@@ -2,10 +2,6 @@
  * CEN4078 Secure Software Development
  * SecureLogin.java
  *
- * Handles secure login functionality with encrypted credentials.
- * CHANGED v2.0: Updated to work with PasswordHandler for consistent password handling.
- * No direct code changes to this file, but compatible with new PasswordHandler architecture.
- *
  * @author Olivia Bunch
  * @version: 2.0
  */
