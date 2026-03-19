@@ -14,7 +14,7 @@ JAVA = java
 MAIN = Main
 
 all:
-	$(JAVAC) Main.java Flawstofixes.java
+	$(JAVAC) Main.java FlawsToFixes.java InvalidInputException.java DivisionByZeroException.java
 	$(JAVA) $(MAIN)
 
 run: all

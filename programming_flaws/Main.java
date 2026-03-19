@@ -8,14 +8,13 @@
 
 public class Main {
     public static void main(String[] args) {
-        Flawstofixes.flawedInput("abc");      // Should fail
-        Flawstofixes.fixedInput("abc");       // Should safely handle
+        FlawsToFixes.flawedInput("abc");      // Should fail
+        FlawsToFixes.fixedInput("abc");       // Should safely handle
 
-        // Test division flaw
-        Flawstofixes.flawedDivision(10, 0);    // Should fail
-        Flawstofixes.fixedDivision(10, 0);     // Should safely handle
+        FlawsToFixes.flawedDivision(10, 0);    // Should fail
+        FlawsToFixes.fixedDivision(10, 0);     // Should safely handle
 
-        Flawstofixes.fixedInput("123");       // Should process successfully
-        Flawstofixes.fixedDivision(10, 2);     // Should process successfully
+        FlawsToFixes.fixedInput("123");       // Should process successfully
+        FlawsToFixes.fixedDivision(10, 2);     // Should process successfully
     }
 }
