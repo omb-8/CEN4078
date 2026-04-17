@@ -5,7 +5,8 @@
 # Runs the program with "make" and "make clean"
 #
 # @author Olivia Bunch
-# @version: 2.0
+# @version: 3.0
+# Now includes notes from peer review and additional test cases
 #
 
 .PHONY: build run run-secure run-covering clean

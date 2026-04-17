@@ -24,7 +24,7 @@ public class SecureLogin {
         System.out.print("Create Password: ");
         String password = scanner.nextLine();
 
-        if (!username.matches("[A-Za-z0-9]+") || !Validator.validCredentials(password)) {
+        if (!Validator.validUsername(username) || !Validator.validCredentials(password)) {
             System.out.println("Invalid credentials.");
             scanner.close();
             return;

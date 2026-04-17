@@ -8,6 +8,12 @@
 
 public class Validator {
 
+    public static boolean validUsername(String input) {
+        if (input == null) return false;
+        if (input.isEmpty()) return false;
+        return input.matches("^[A-Za-z0-9]+");
+    }  
+
     public static boolean validCredentials(String input) {
         if (input == null) return false;
         if (input.length() < 8) return false;
