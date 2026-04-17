@@ -29,7 +29,7 @@ public class SecureLogin {
 
         // Validate inputs: password must have upper, lower, digit
         // Username must be alphanumeric only
-        if (!username.matches("[A-Za-z0-9]+") || !Validator.validCredentials(password)) {
+        if (!Validator.validUsername(username) || !Validator.validCredentials(password)) {
             System.out.println("Invalid credentials.");
             scanner.close();
             return;

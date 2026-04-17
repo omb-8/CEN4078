@@ -5,7 +5,8 @@
 # Makefile for compiling and running the SecureLogin Java application
 #
 # @author Olivia Bunch
-# @version: 1.0
+# @version: 2.0
+# Now includes notes from peer review
 #
 
 JAVAC = javac
